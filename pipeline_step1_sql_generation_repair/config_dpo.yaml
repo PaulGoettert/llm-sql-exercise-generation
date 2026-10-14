@@ -1,0 +1,50 @@
+base_model: ./models/Qwen2.5  # local path to base model directory
+
+load_in_4bit: true
+adapter: qlora
+bf16: true
+gradient_checkpointing: true
+flash_attention: true
+sample_packing: true
+
+sequence_len: 8192
+micro_batch_size: 1
+gradient_accumulation_steps: 16
+num_epochs: 3
+learning_rate: 5.0e-6
+optimizer: paged_adamw_8bit
+lr_scheduler: cosine
+warmup_ratio: 0.05
+
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+rl: dpo
+trl:
+  beta: 0.05
+  max_completion_length: 512
+
+datasets:
+  - ds_type: json
+    data_files:
+      - ./data/train_dpo.jsonl
+    split: train
+    type:
+      field_system: system
+      field_prompt: prompt
+      field_chosen: chosen
+      field_rejected: rejected
+      prompt_format: "{prompt}"
+      chosen_format: "{chosen}"
+      rejected_format: "{rejected}"
+
+output_dir: ./outputs/dpo

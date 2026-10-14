@@ -1,0 +1,57 @@
+base_model: ./models/Qwen3-Coder-30B-A3B-Instruct
+
+load_in_4bit: false
+adapter: lora
+bf16: true
+
+experimental_skip_move_to_device: true
+gradient_checkpointing: false
+flash_attention: true
+
+sequence_len: 3072
+micro_batch_size: 1
+gradient_accumulation_steps: 16
+
+num_epochs: 3
+learning_rate: 5.0e-6
+optimizer: adamw_torch
+lr_scheduler: cosine
+warmup_ratio: 0.05
+
+dataset_processes: 8
+dataset_num_proc: 8
+dataloader_num_workers: 2
+dataloader_pin_memory: true
+
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+datasets:
+  - path: ./data/train_finetuning_axolotl_chatml.jsonl
+    ds_type: json
+    split: train
+    type: chat_template
+    field_messages: messages
+
+chat_template: tokenizer_default
+output_dir: ./outputs/sft
+
+fsdp_version: 2
+fsdp_config:
+  auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
+  activation_checkpointing: true
+  reshard_after_forward: true
+  offload_params: false
+  state_dict_type: SHARDED_STATE_DICT
+  cpu_ram_efficient_loading: true
+

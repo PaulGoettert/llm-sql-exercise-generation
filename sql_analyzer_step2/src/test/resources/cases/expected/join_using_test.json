@@ -1,0 +1,118 @@
+[
+    {
+  "db" : "department_management",
+  "query" : "SELECT d.Department_ID FROM department d JOIN management m USING (department_ID)",
+  "parsed_sql" : "SELECT `d`.`department_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`management` AS `m` USING (`department_id`)",
+  "validated_sql" : "SELECT `d`.`department_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`management` AS `m` USING (`department_id`)",
+  "semantic_checker" : {
+    "Unused-Tuple-Variable" : true
+  },
+  "semantic_checker_details" : {
+    "Unused-Tuple-Variable" : "Hint: The JOIN condition is most likely missing"
+  },
+  "relational_plan" : "LogicalProject(Department_ID=[$0])\n  LogicalJoin(condition=[=($0, $6)], joinType=[inner])\n    LogicalTableScan(table=[[default, department]])\n    LogicalTableScan(table=[[default, management]])\n",
+  "query_difficulty" : 2,
+  "sql_for_execution" : "SELECT d.Department_ID FROM department d JOIN management m USING (department_ID)",
+  "execution" : {
+    "success" : true,
+    "row_count" : 5,
+    "columns" : [ "Department_ID" ],
+    "preview" : [ [ 2 ], [ 2 ], [ 7 ], [ 11 ], [ 15 ] ]
+  },
+  "foreign_key_check" : {
+    "predefined_foreign_keys" : [ "management.Department_ID = department.Department_ID", "management.head_ID = head.head_ID" ],
+    "used_fk" : [ "DEPARTMENT.DEPARTMENT_ID = MANAGEMENT.DEPARTMENT_ID" ],
+    "correctly_used" : [ "DEPARTMENT.DEPARTMENT_ID = MANAGEMENT.DEPARTMENT_ID" ],
+    "not_used" : [ "HEAD.HEAD_ID = MANAGEMENT.HEAD_ID" ],
+    "incorrect" : [ ],
+    "selfjoin_used" : "no"
+  }
+},
+{
+  "db" : "department_management",
+  "query" : "SELECT d.Department_ID, h.head_ID FROM department d JOIN management m USING (department_ID) JOIN head h USING (head_ID)",
+  "parsed_sql" : "SELECT `d`.`department_id`, `h`.`head_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`management` AS `m` USING (`department_id`)\nINNER JOIN `default`.`head` AS `h` USING (`head_id`)",
+  "validated_sql" : "SELECT `d`.`department_id`, `h`.`head_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`management` AS `m` USING (`department_id`)\nINNER JOIN `default`.`head` AS `h` USING (`head_id`)",
+  "semantic_checker" : {
+    "Unused-Tuple-Variable" : true
+  },
+  "semantic_checker_details" : {
+    "Unused-Tuple-Variable" : "Hint: The JOIN condition is most likely missing"
+  },
+  "relational_plan" : "LogicalProject(Department_ID=[$0], head_ID=[$9])\n  LogicalJoin(condition=[=($7, $9)], joinType=[inner])\n    LogicalJoin(condition=[=($0, $6)], joinType=[inner])\n      LogicalTableScan(table=[[default, department]])\n      LogicalTableScan(table=[[default, management]])\n    LogicalTableScan(table=[[default, head]])\n",
+  "query_difficulty" : 2,
+  "sql_for_execution" : "SELECT d.Department_ID, h.head_ID FROM department d JOIN management m USING (department_ID) JOIN head h USING (head_ID)",
+  "execution" : {
+    "success" : true,
+    "row_count" : 5,
+    "columns" : [ "Department_ID", "head_ID" ],
+    "preview" : [ [ 2, 5 ], [ 2, 6 ], [ 7, 3 ], [ 11, 10 ], [ 15, 4 ] ]
+  },
+  "foreign_key_check" : {
+    "predefined_foreign_keys" : [ "management.Department_ID = department.Department_ID", "management.head_ID = head.head_ID" ],
+    "used_fk" : [ "HEAD.HEAD_ID = MANAGEMENT.HEAD_ID", "DEPARTMENT.DEPARTMENT_ID = MANAGEMENT.DEPARTMENT_ID" ],
+    "correctly_used" : [ "HEAD.HEAD_ID = MANAGEMENT.HEAD_ID", "DEPARTMENT.DEPARTMENT_ID = MANAGEMENT.DEPARTMENT_ID" ],
+    "not_used" : [ ],
+    "incorrect" : [ ],
+    "selfjoin_used" : "no"
+  }
+},
+{
+  "db" : "department_management",
+  "query" : "SELECT d.Department_ID FROM department d JOIN head h USING (Name)",
+  "parsed_sql" : "SELECT `d`.`department_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`head` AS `h` USING (`name`)",
+  "validated_sql" : "SELECT `d`.`department_id`\nFROM `default`.`department` AS `d`\nINNER JOIN `default`.`head` AS `h` USING (`name`)",
+  "semantic_checker" : {
+    "Unused-Tuple-Variable" : true
+  },
+  "semantic_checker_details" : {
+    "Unused-Tuple-Variable" : "Hint: The JOIN condition is most likely missing"
+  },
+  "relational_plan" : "LogicalProject(Department_ID=[$0])\n  LogicalJoin(condition=[=($1, $7)], joinType=[inner])\n    LogicalTableScan(table=[[default, department]])\n    LogicalTableScan(table=[[default, head]])\n",
+  "query_difficulty" : 2,
+  "sql_for_execution" : "SELECT d.Department_ID FROM department d JOIN head h USING (Name)",
+  "execution" : {
+    "success" : true,
+    "row_count" : 0,
+    "columns" : [ "Department_ID" ],
+    "preview" : [ ]
+  },
+  "foreign_key_check" : {
+    "predefined_foreign_keys" : [ "management.Department_ID = department.Department_ID", "management.head_ID = head.head_ID" ],
+    "used_fk" : [ "DEPARTMENT.NAME = HEAD.NAME" ],
+    "correctly_used" : [ ],
+    "not_used" : [ "DEPARTMENT.DEPARTMENT_ID = MANAGEMENT.DEPARTMENT_ID", "HEAD.HEAD_ID = MANAGEMENT.HEAD_ID" ],
+    "incorrect" : [ "DEPARTMENT.NAME = HEAD.NAME" ],
+    "selfjoin_used" : "no"
+  }
+}, 
+{
+  "db" : "cre_Doc_Control_Systems",
+  "query" : "SELECT dc.document_id, dc.draft_number FROM Draft_Copies dc JOIN Document_Drafts dd USING (document_id, draft_number)",
+  "parsed_sql" : "SELECT `dc`.`document_id`, `dc`.`draft_number`\nFROM `default`.`draft_copies` AS `dc`\nINNER JOIN `default`.`document_drafts` AS `dd` USING (`document_id`, `draft_number`)",
+  "validated_sql" : "SELECT `dc`.`document_id`, `dc`.`draft_number`\nFROM `default`.`draft_copies` AS `dc`\nINNER JOIN `default`.`document_drafts` AS `dd` USING (`document_id`, `draft_number`)",
+  "semantic_checker" : {
+    "Unused-Tuple-Variable" : true
+  },
+  "semantic_checker_details" : {
+    "Unused-Tuple-Variable" : "Hint: The JOIN condition is most likely missing"
+  },
+  "relational_plan" : "LogicalProject(document_id=[$0], draft_number=[$1])\n  LogicalJoin(condition=[AND(=($0, $3), =($1, $4))], joinType=[inner])\n    LogicalTableScan(table=[[default, draft_copies]])\n    LogicalTableScan(table=[[default, document_drafts]])\n",
+  "query_difficulty" : 2,
+  "sql_for_execution" : "SELECT dc.document_id, dc.draft_number FROM Draft_Copies dc JOIN Document_Drafts dd USING (document_id, draft_number)",
+  "execution" : {
+    "success" : true,
+    "row_count" : 8,
+    "columns" : [ "document_id", "draft_number" ],
+    "preview" : [ [ 2, 8 ], [ 4, 9 ], [ 23, 9 ], [ 10, 20 ], [ 2, 1 ] ]
+  },
+  "foreign_key_check" : {
+    "predefined_foreign_keys" : [ "Documents.document_type_code = Ref_Document_Types.document_type_code", "Documents.document_status_code = Ref_Document_Status.document_status_code", "Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code", "Employees.role_code = Roles.role_code", "Document_Drafts.document_id = Documents.document_id", "Draft_Copies.document_id, Draft_Copies.draft_number = Document_Drafts.document_id, Document_Drafts.draft_number", "Circulation_History.document_id, Circulation_History.draft_number, Circulation_History.copy_number = Draft_Copies.document_id, Draft_Copies.draft_number, Draft_Copies.copy_number", "Circulation_History.employee_id = Employees.employee_id", "Documents_Mailed.document_id = Documents.document_id", "Documents_Mailed.mailed_to_address_id = Addresses.address_id" ],
+    "used_fk" : [ "DOCUMENT_DRAFTS.DOCUMENT_ID, DOCUMENT_DRAFTS.DRAFT_NUMBER = DRAFT_COPIES.DOCUMENT_ID, DRAFT_COPIES.DRAFT_NUMBER" ],
+    "correctly_used" : [ "DOCUMENT_DRAFTS.DOCUMENT_ID, DOCUMENT_DRAFTS.DRAFT_NUMBER = DRAFT_COPIES.DOCUMENT_ID, DRAFT_COPIES.DRAFT_NUMBER" ],
+    "not_used" : [ "DOCUMENTS.DOCUMENT_STATUS_CODE = REF_DOCUMENT_STATUS.DOCUMENT_STATUS_CODE", "CIRCULATION_HISTORY.DOCUMENT_ID, CIRCULATION_HISTORY.DRAFT_NUMBER, CIRCULATION_HISTORY.COPY_NUMBER = DRAFT_COPIES.DOCUMENT_ID, DRAFT_COPIES.DRAFT_NUMBER, DRAFT_COPIES.COPY_NUMBER", "DOCUMENTS.DOCUMENT_ID = DOCUMENTS_MAILED.DOCUMENT_ID", "DOCUMENTS.SHIPPING_AGENT_CODE = REF_SHIPPING_AGENTS.SHIPPING_AGENT_CODE", "ADDRESSES.ADDRESS_ID = DOCUMENTS_MAILED.MAILED_TO_ADDRESS_ID", "DOCUMENTS.DOCUMENT_ID = DOCUMENT_DRAFTS.DOCUMENT_ID", "EMPLOYEES.ROLE_CODE = ROLES.ROLE_CODE", "DOCUMENTS.DOCUMENT_TYPE_CODE = REF_DOCUMENT_TYPES.DOCUMENT_TYPE_CODE", "CIRCULATION_HISTORY.EMPLOYEE_ID = EMPLOYEES.EMPLOYEE_ID" ],
+    "incorrect" : [ ],
+    "selfjoin_used" : "no"
+  }
+ }
+]

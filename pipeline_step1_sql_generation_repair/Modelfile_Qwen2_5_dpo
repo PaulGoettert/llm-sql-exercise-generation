@@ -1,0 +1,6 @@
+# Qwen 2.5 model after DPO merge/conversion.
+FROM ./qwen2.5_dpo_bf16.gguf
+
+PARAMETER temperature 0.2
+PARAMETER top_p 0.9
+PARAMETER num_ctx 8192

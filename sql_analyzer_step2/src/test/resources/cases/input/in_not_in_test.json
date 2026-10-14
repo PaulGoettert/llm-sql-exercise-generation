@@ -1,0 +1,406 @@
+[
+    {
+    "db_id": "department_management",
+    "query": "Härtefall: IN-Klausel – FK (management.department_ID) in department prüfen",
+    "question": "Härtefall: IN-Klausel – FK (management.department_ID) in department prüfen",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d WHERE d.Department_ID IN (SELECT m.department_ID FROM management m)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "Härtefall: NOT IN-Klausel – Sicherstellen, dass FK (management.department_ID) nicht referenziert wird",
+    "question": "Härtefall: NOT IN-Klausel – Sicherstellen, dass FK (management.department_ID) nicht referenziert wird",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d WHERE d.Department_ID NOT IN (SELECT m.department_ID FROM management m)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "Härtefall: Unqualifizierte Spaltenreferenz – Überprüfung von department ohne Alias in IN-Klausel",
+    "question": "Härtefall: Unqualifizierte Spaltenreferenz – Überprüfung von department ohne Alias in IN-Klausel",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT Department_ID FROM department WHERE Department_ID IN (SELECT department_ID FROM management)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "IN clause with tuple equality",
+    "question": "IN clause with tuple equality",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d WHERE (d.Department_ID) NOT IN (SELECT m.department_ID FROM management m)"
+  },
+  {
+    "db_id": "cre_Doc_Control_Systems",
+    "query": "IN clause with tuple equality on composite FK",
+    "question": "IN clause with tuple equality on composite FK",
+    "tables": [
+      "Table Ref_Document_Types columns = [*, *, document_type_code, document_type_description]",
+      "Table Roles columns = [*, *, role_code, role_description]",
+      "Table Addresses columns = [*, *, address_id, address_details]",
+      "Table Ref_Document_Status columns = [*, *, document_status_code, document_status_description]",
+      "Table Ref_Shipping_Agents columns = [*, *, shipping_agent_code, shipping_agent_name, shipping_agent_description]",
+      "Table Documents columns = [*, *, document_id, document_status_code, document_type_code, shipping_agent_code, receipt_date, receipt_number, other_details]",
+      "Table Employees columns = [*, *, employee_id, role_code, employee_name, other_details]",
+      "Table Document_Drafts columns = [*, *, document_id, draft_number, draft_details]",
+      "Table Draft_Copies columns = [*, *, document_id, draft_number, copy_number]",
+      "Table Circulation_History columns = [*, *, document_id, draft_number, copy_number, employee_id]",
+      "Table Documents_Mailed columns = [*, *, document_id, mailed_to_address_id, mailing_date]"
+    ],
+    "primary_keys": {
+      "Ref_Document_Types": [
+        "document_type_code"
+      ],
+      "Roles": [
+        "role_code"
+      ],
+      "Addresses": [
+        "address_id"
+      ],
+      "Ref_Document_Status": [
+        "document_status_code"
+      ],
+      "Ref_Shipping_Agents": [
+        "shipping_agent_code"
+      ],
+      "Documents": [
+        "document_id"
+      ],
+      "Employees": [
+        "employee_id"
+      ],
+      "Document_Drafts": [
+        "document_id",
+        "draft_number"
+      ],
+      "Draft_Copies": [
+        "document_id",
+        "draft_number",
+        "copy_number"
+      ],
+      "Circulation_History": [
+        "document_id",
+        "draft_number",
+        "copy_number",
+        "employee_id"
+      ],
+      "Documents_Mailed": [
+        "document_id",
+        "mailed_to_address_id"
+      ]
+    },
+    "foreign_keys": [
+      "Documents.document_type_code = Ref_Document_Types.document_type_code",
+      "Documents.document_status_code = Ref_Document_Status.document_status_code",
+      "Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code",
+      "Employees.role_code = Roles.role_code",
+      "Document_Drafts.document_id = Documents.document_id",
+      "Draft_Copies.document_id, Draft_Copies.draft_number = Document_Drafts.document_id, Document_Drafts.draft_number",
+      "Circulation_History.document_id, Circulation_History.draft_number, Circulation_History.copy_number = Draft_Copies.document_id, Draft_Copies.draft_number, Draft_Copies.copy_number",
+      "Circulation_History.employee_id = Employees.employee_id",
+      "Documents_Mailed.document_id = Documents.document_id",
+      "Documents_Mailed.mailed_to_address_id = Addresses.address_id"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "Ref_Document_Types": {
+        "document_type_code": "CHAR",
+        "document_type_description": "VARCHAR"
+      },
+      "Roles": {
+        "role_code": "CHAR",
+        "role_description": "VARCHAR"
+      },
+      "Addresses": {
+        "address_id": "INTEGER",
+        "address_details": "VARCHAR"
+      },
+      "Ref_Document_Status": {
+        "document_status_code": "CHAR",
+        "document_status_description": "VARCHAR"
+      },
+      "Ref_Shipping_Agents": {
+        "shipping_agent_code": "CHAR",
+        "shipping_agent_name": "VARCHAR",
+        "shipping_agent_description": "VARCHAR"
+      },
+      "Documents": {
+        "document_id": "INTEGER",
+        "document_status_code": "CHAR",
+        "document_type_code": "CHAR",
+        "shipping_agent_code": "CHAR",
+        "receipt_date": "DATETIME",
+        "receipt_number": "VARCHAR",
+        "other_details": "VARCHAR"
+      },
+      "Employees": {
+        "employee_id": "INTEGER",
+        "role_code": "CHAR",
+        "employee_name": "VARCHAR",
+        "other_details": "VARCHAR"
+      },
+      "Document_Drafts": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "draft_details": "VARCHAR"
+      },
+      "Draft_Copies": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "copy_number": "INTEGER"
+      },
+      "Circulation_History": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "copy_number": "INTEGER",
+        "employee_id": "INTEGER"
+      },
+      "Documents_Mailed": {
+        "document_id": "INTEGER",
+        "mailed_to_address_id": "INTEGER",
+        "mailing_date": "DATETIME"
+      }
+    },
+    "generated_query": "SELECT dc.document_id, dc.draft_number FROM Draft_Copies dc WHERE (dc.document_id, dc.draft_number) IN (SELECT dd.document_id, dd.draft_number FROM Document_Drafts dd)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "Negation von IN: Departments ohne Manager – NOT (IN-Subquery) (Filter: NOT (Department_ID IN (SELECT department_ID FROM management)))",
+    "question": "Negation von IN: Departments ohne Manager – NOT (IN-Subquery) (Filter: NOT (Department_ID IN (SELECT department_ID FROM management)))",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d WHERE NOT (d.Department_ID IN (SELECT m.department_ID FROM management m))"
+  }
+]

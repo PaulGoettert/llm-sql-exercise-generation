@@ -1,0 +1,8 @@
+# Runtime dependencies for the Python pipeline scripts.
+# Java/Maven dependencies for sql_analyzer_step2 are managed by sql_analyzer_step2/pom.xml.
+# Axolotl training should use a separate Axolotl environment; see the config files and server scripts.
+
+requests>=2.31
+sqlglot>=25.0
+numpy>=1.26
+sentence-transformers>=3.0

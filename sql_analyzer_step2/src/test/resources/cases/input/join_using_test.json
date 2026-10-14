@@ -1,0 +1,302 @@
+[
+    {
+    "db_id": "department_management",
+    "query": "Härtefall: JOIN mittels USING (equivalenter FK-Pattern)",
+    "question": "Härtefall: JOIN mittels USING (equivalenter FK-Pattern)",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d JOIN management m USING (department_ID)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "SELECT d.Department_ID, h.head_ID FROM department d JOIN management m USING (department_ID) JOIN head h USING (head_ID)",
+    "question": "Positive: USING-Join auf beide FK‑Spalten nacheinander",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID, h.head_ID FROM department d JOIN management m USING (department_ID) JOIN head h USING (head_ID)"
+  },
+  {
+    "db_id": "department_management",
+    "query": "SELECT d.Department_ID FROM department d JOIN head h USING (Name)",
+    "question": "Negative: USING-Join auf non‑FK‑Spalte Name",
+    "tables": [
+      "Table department columns = [Department_ID, Name, Creation, Ranking, Budget_in_Billions, Num_Employees]",
+      "Table head columns = [head_ID, name, born_state, age]",
+      "Table management columns = [department_ID, head_ID, temporary_acting]"
+    ],
+    "primary_keys": {
+      "department": [
+        "Department_ID"
+      ],
+      "head": [
+        "head_ID"
+      ],
+      "management": [
+        "department_ID",
+        "head_ID"
+      ]
+    },
+    "foreign_keys": [
+      "management.Department_ID = department.Department_ID",
+      "management.head_ID = head.head_ID"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "department": {
+        "Department_ID": "INT",
+        "Name": "TEXT",
+        "Creation": "TEXT",
+        "Ranking": "INT",
+        "Budget_in_Billions": "REAL",
+        "Num_Employees": "REAL"
+      },
+      "head": {
+        "head_ID": "INT",
+        "name": "TEXT",
+        "born_state": "TEXT",
+        "age": "REAL"
+      },
+      "management": {
+        "department_ID": "INT",
+        "head_ID": "INT",
+        "temporary_acting": "TEXT"
+      }
+    },
+    "generated_query": "SELECT d.Department_ID FROM department d JOIN head h USING (Name)"
+  },
+  {
+    "db_id": "cre_Doc_Control_Systems",
+    "query": "JOIN using USING clause on composite FK",
+    "question": "JOIN using USING clause on composite FK",
+    "tables": [
+      "Table Ref_Document_Types columns = [*, *, document_type_code, document_type_description]",
+      "Table Roles columns = [*, *, role_code, role_description]",
+      "Table Addresses columns = [*, *, address_id, address_details]",
+      "Table Ref_Document_Status columns = [*, *, document_status_code, document_status_description]",
+      "Table Ref_Shipping_Agents columns = [*, *, shipping_agent_code, shipping_agent_name, shipping_agent_description]",
+      "Table Documents columns = [*, *, document_id, document_status_code, document_type_code, shipping_agent_code, receipt_date, receipt_number, other_details]",
+      "Table Employees columns = [*, *, employee_id, role_code, employee_name, other_details]",
+      "Table Document_Drafts columns = [*, *, document_id, draft_number, draft_details]",
+      "Table Draft_Copies columns = [*, *, document_id, draft_number, copy_number]",
+      "Table Circulation_History columns = [*, *, document_id, draft_number, copy_number, employee_id]",
+      "Table Documents_Mailed columns = [*, *, document_id, mailed_to_address_id, mailing_date]"
+    ],
+    "primary_keys": {
+      "Ref_Document_Types": [
+        "document_type_code"
+      ],
+      "Roles": [
+        "role_code"
+      ],
+      "Addresses": [
+        "address_id"
+      ],
+      "Ref_Document_Status": [
+        "document_status_code"
+      ],
+      "Ref_Shipping_Agents": [
+        "shipping_agent_code"
+      ],
+      "Documents": [
+        "document_id"
+      ],
+      "Employees": [
+        "employee_id"
+      ],
+      "Document_Drafts": [
+        "document_id",
+        "draft_number"
+      ],
+      "Draft_Copies": [
+        "document_id",
+        "draft_number",
+        "copy_number"
+      ],
+      "Circulation_History": [
+        "document_id",
+        "draft_number",
+        "copy_number",
+        "employee_id"
+      ],
+      "Documents_Mailed": [
+        "document_id",
+        "mailed_to_address_id"
+      ]
+    },
+    "foreign_keys": [
+      "Documents.document_type_code = Ref_Document_Types.document_type_code",
+      "Documents.document_status_code = Ref_Document_Status.document_status_code",
+      "Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code",
+      "Employees.role_code = Roles.role_code",
+      "Document_Drafts.document_id = Documents.document_id",
+      "Draft_Copies.document_id, Draft_Copies.draft_number = Document_Drafts.document_id, Document_Drafts.draft_number",
+      "Circulation_History.document_id, Circulation_History.draft_number, Circulation_History.copy_number = Draft_Copies.document_id, Draft_Copies.draft_number, Draft_Copies.copy_number",
+      "Circulation_History.employee_id = Employees.employee_id",
+      "Documents_Mailed.document_id = Documents.document_id",
+      "Documents_Mailed.mailed_to_address_id = Addresses.address_id"
+    ],
+    "foreign_key_cardinalities": [
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1",
+      "N:1"
+    ],
+    "column_types": {
+      "Ref_Document_Types": {
+        "document_type_code": "CHAR",
+        "document_type_description": "VARCHAR"
+      },
+      "Roles": {
+        "role_code": "CHAR",
+        "role_description": "VARCHAR"
+      },
+      "Addresses": {
+        "address_id": "INTEGER",
+        "address_details": "VARCHAR"
+      },
+      "Ref_Document_Status": {
+        "document_status_code": "CHAR",
+        "document_status_description": "VARCHAR"
+      },
+      "Ref_Shipping_Agents": {
+        "shipping_agent_code": "CHAR",
+        "shipping_agent_name": "VARCHAR",
+        "shipping_agent_description": "VARCHAR"
+      },
+      "Documents": {
+        "document_id": "INTEGER",
+        "document_status_code": "CHAR",
+        "document_type_code": "CHAR",
+        "shipping_agent_code": "CHAR",
+        "receipt_date": "DATETIME",
+        "receipt_number": "VARCHAR",
+        "other_details": "VARCHAR"
+      },
+      "Employees": {
+        "employee_id": "INTEGER",
+        "role_code": "CHAR",
+        "employee_name": "VARCHAR",
+        "other_details": "VARCHAR"
+      },
+      "Document_Drafts": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "draft_details": "VARCHAR"
+      },
+      "Draft_Copies": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "copy_number": "INTEGER"
+      },
+      "Circulation_History": {
+        "document_id": "INTEGER",
+        "draft_number": "INTEGER",
+        "copy_number": "INTEGER",
+        "employee_id": "INTEGER"
+      },
+      "Documents_Mailed": {
+        "document_id": "INTEGER",
+        "mailed_to_address_id": "INTEGER",
+        "mailing_date": "DATETIME"
+      }
+    },
+    "generated_query": "SELECT dc.document_id, dc.draft_number FROM Draft_Copies dc JOIN Document_Drafts dd USING (document_id, draft_number)"
+  }
+]

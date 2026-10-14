@@ -1,0 +1,8 @@
+# Qwen 3 base model for Ollama inference.
+# Adjust FROM and optional ADAPTER to your local GGUF filenames.
+FROM ./gguf_build/Qwen3_model.gguf
+# ADAPTER ./gguf_build/Qwen3_adapter.gguf
+
+PARAMETER temperature 0.2
+PARAMETER top_p 0.9
+PARAMETER num_ctx 8192
